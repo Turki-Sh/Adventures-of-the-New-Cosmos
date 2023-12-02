@@ -2,6 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 class Inventory{
     static final int SIZE = 20;
     static int lastindex = 0;
@@ -125,9 +127,9 @@ class Player extends Inventory{
 
         for (int i = 0; i < 20; i++) {
             if (i < (exp * 20) / (level * 100)) {
-                System.out.print("█"); // Filled part of the bar
+                System.out.print("\033[1;32m█"); // Filled part of the bar
             } else {
-                System.out.print("░"); // Empty part of the bar
+                System.out.print("\033[1;0m░"); // Empty part of the bar
             }
         }
         System.out.print("\033[0m]");
@@ -708,6 +710,9 @@ public class Main {
                 RESET
         );
 
+        // Check that the list work Okay
+        //PrintAll();
+
         Player player = new Player();
         Guild guild = new Guild(player);
         int choice = 0;
@@ -902,6 +907,29 @@ public class Main {
         );
     }
 
+    public static void PrintAll(){
+        //Function for debugging monsters/herbs/boss monster
+
+        //Print random Herbs
+        System.out.println("\nHERBS: ");
+        Herbs[] herbsArray = new Herbs[3];
+        for (int i = 0; i < herbsArray.length; i++) {
+            herbsArray[i] = new Herbs();
+            herbsArray[i].print_herb();
+        }
+
+        //Print list of monsters in the monster class
+        System.out.println("\nMonsters: ");
+        // Convert MONSTER_TYPES array to ArrayList
+        List<String> monsterList = new ArrayList<>();
+        for (String monsterType : Monster.MONSTER_TYPES) {
+            monsterList.add(monsterType);
+        }
+        System.out.println(monsterList);
+
+
+    }
+
     private static void displayTownMenu(){
         System.out.println(
                 "\u001B[32m"+
@@ -925,4 +953,4 @@ public class Main {
         }
     }
 
-}//End of code
+}//End end of code
